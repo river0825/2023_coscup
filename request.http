@@ -1,0 +1,73 @@
+# curl http://localhost:8080/api/v1/backpack/takeout
+POST http://localhost:8080/api/v1/backpack/takeout
+Content-Type: application/json
+
+{
+  "backpack_id": "backpack",
+  "item_id": "item001",
+  "count": 1
+}
+
+> {%
+    client.test("Request executed should fail, no item exists", function() {
+        client.assert(response.status === 400, "Response status is not 400");
+    });
+%}
+
+###
+
+POST http://localhost:8080/api/v1/backpack/putitem?backpackId=backpack&item=book&count=1
+Content-Type: application/json
+
+{
+  "backpack_id": "backpack",
+  "item_id": "item001",
+  "count": 1
+}
+
+> {%
+    client.test("Request executed should fail, no item exists", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+        client.assert(response.body.data.count === 1, "Response body data count should be 1");
+    });
+%}
+
+###
+
+# curl http://localhost:8080/api/v1/backpack/takeout
+POST http://localhost:8080/api/v1/backpack/takeout
+Content-Type: application/json
+
+{
+  "backpack_id": "backpack",
+  "item_id": "item001",
+  "count": 1
+}
+
+> {%
+    client.test("Request executed should fail, no item exists", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+        client.assert(response.body.data.count === 0, "Response body data count should be 0");
+    });
+%}
+
+
+###
+
+POST http://localhost:8080/api/v1/backpack/putitem?backpackId=backpack&item=book&count=1
+Content-Type: application/json
+
+{
+  "backpack_id": "backpack",
+  "item_id": "item001",
+  "count": 999
+}
+
+> {%
+    client.test("Request executed should fail, no item exists", function() {
+        client.assert(response.status === 200, "Response status is not 200");
+        client.assert(response.body.data.count === 1, "Response body data count should be 1");
+    });
+%}
+
+###

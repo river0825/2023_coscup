@@ -16,6 +16,8 @@ go run main.go
 
 ## Integration test
 
-Using JetBrain Http Client to run i
+Using JetBrain Http Client to run 
+
+https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html
 
 test file: `request.http`
